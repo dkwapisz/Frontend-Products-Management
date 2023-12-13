@@ -1,5 +1,7 @@
 package org.pk.lab3.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import org.pk.lab3.utils.UpdatePair;
 
@@ -8,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 @Data
+@Builder
+@AllArgsConstructor
 public class Product {
 
     private String id;

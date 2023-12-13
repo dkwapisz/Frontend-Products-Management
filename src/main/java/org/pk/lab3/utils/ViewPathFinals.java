@@ -9,4 +9,5 @@ public class ViewPathFinals {
     public static final String PRODUCT_CREATE_VIEW_PATH = "product-create-scene.fxml";
     public static final String PRODUCT_DETAILS_VIEW_PATH = "product-details-scene.fxml";
     public static final String PRODUCT_LIST_VIEW_PATH = "product-list-scene.fxml";
+
 }
