@@ -40,6 +40,7 @@ public class ProductCreateView {
 
     @FXML
     public void createProductButtonOnClick() {
+        // TODO Send data to ViewModel
         System.out.println("Add Product");
     }
 }

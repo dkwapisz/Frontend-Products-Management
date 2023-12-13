@@ -18,8 +18,9 @@ public enum ProductCategory {
         this.productCategory = productCategory;
     }
 
-    public String getProductCategoryName() {
-        return this.productCategory;
+    @Override
+    public String toString() {
+        return productCategory;
     }
 }
 

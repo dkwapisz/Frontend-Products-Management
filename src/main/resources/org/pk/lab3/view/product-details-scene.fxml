@@ -66,36 +66,41 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField id="idTextField" fx:id="idTextField" layoutX="150.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="nameTextField" fx:id="nameTextField" layoutX="150.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="descriptionTextField" fx:id="descriptionTextField" layoutX="150.0" layoutY="200.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="priceTextField" fx:id="priceTextField" layoutX="150.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="weightTextField" fx:id="weightTextField" layoutX="700.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="availabilityTextField" fx:id="availabilityTextField" layoutX="700.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="creationDateTextField" fx:id="creationDateTextField" layoutX="700.0" layoutY="250.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="lastUpdateTextField" fx:id="lastUpdateTextField" layoutX="700.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="idTextField" fx:id="idTextField" disable="true" layoutX="150.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="nameTextField" fx:id="nameTextField" disable="true" layoutX="150.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="descriptionTextField" fx:id="descriptionTextField" disable="true" layoutX="150.0" layoutY="200.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="priceTextField" fx:id="priceTextField" disable="true" layoutX="150.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="weightTextField" fx:id="weightTextField" disable="true" layoutX="700.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="availabilityTextField" fx:id="availabilityTextField" disable="true" layoutX="700.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="creationDateTextField" fx:id="creationDateTextField" disable="true" layoutX="700.0" layoutY="250.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="lastUpdateTextField" fx:id="lastUpdateTextField" disable="true" layoutX="700.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
       <TreeView id="historyTreeView" fx:id="historyTreeView" layoutX="150.0" layoutY="425.0" prefHeight="200.0" prefWidth="700.0" />
-      <Button id="editButton" fx:id="editButton" onMouseClicked="#editButtonOnClick" alignment="CENTER" layoutX="175.0" layoutY="675.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Edit">
+      <Button id="editButton" fx:id="editButton" alignment="CENTER" layoutX="175.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#editButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Edit">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button id="backToMenuButton" fx:id="backToMenuButton" onMouseClicked="#backToMenuButtonOnClick" alignment="CENTER" layoutX="450.0" layoutY="675.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER">
+      <Button id="backToMenuButton" fx:id="backToMenuButton" alignment="CENTER" layoutX="544.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button id="deleteButton" fx:id="deleteButton" onMouseClicked="#deleteButtonOnClick" alignment="CENTER" layoutX="725.0" layoutY="675.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Delete">
+      <Button id="deleteButton" fx:id="deleteButton" alignment="CENTER" layoutX="725.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#deleteButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Delete">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
       <ComboBox id="productCategoryComboBox" fx:id="productCategoryComboBox" disable="true" layoutX="700.0" layoutY="200.0" prefHeight="50.0" prefWidth="250.0" />
-      <Spinner id="quantitySpinner" fx:id="quantitySpinner" disable="true" layoutX="150.0" layoutY="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <Spinner id="quantitySpinner" fx:id="quantitySpinner" disable="true" editable="true" layoutX="150.0" layoutY="250.0" prefHeight="50.0" prefWidth="250.0" />
       <Label id="promptLabel" fx:id="promptLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="37.0" prefHeight="30.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Bold Italic" size="12.0" />
          </font>
       </Label>
+      <Button id="editSaveButton" fx:id="editSaveButton" alignment="CENTER" disable="true" layoutX="362.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#saveButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Save" textAlignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

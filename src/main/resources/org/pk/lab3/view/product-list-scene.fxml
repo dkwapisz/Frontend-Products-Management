@@ -19,7 +19,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button id="backToMenuButton" fx:id="backToMenuButton" onMouseClicked="#backToMenuButtonOnClick" layoutX="250.0" layoutY="740.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Back to menu" />
-      <Button id="addProductButton" fx:id="addProductButton" onMouseClicked="#addProductButtonOnClick" layoutX="600.0" layoutY="740.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Add new product" />
+      <Button id="backToMenuButton" fx:id="backToMenuButton" layoutX="250.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Back to menu" />
+      <Button id="addProductButton" fx:id="addProductButton" layoutX="600.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#addProductButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Add new product" />
    </children>
 </AnchorPane>
