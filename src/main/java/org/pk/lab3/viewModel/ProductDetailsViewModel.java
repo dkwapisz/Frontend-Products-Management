@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
+import org.pk.lab3.service.cache.CachingService;
 import org.pk.lab3.service.model.ProductService;
 import org.pk.lab3.utils.AppConfig;
 
@@ -63,6 +64,7 @@ public class ProductDetailsViewModel {
         boolean deleted = ProductService.getInstance().deleteProduct(idTextField.getText());
 
         if (deleted) {
+            invalidateCacheAfterAction(idTextField.getText());
             promptLabel.setText("Product has been removed");
             clearProductDataFromView();
             disableFieldsEditing();
@@ -93,6 +95,7 @@ public class ProductDetailsViewModel {
             boolean edited = ProductService.getInstance().updateProduct(idTextField.getText(), editedProduct);
 
             if (edited) {
+                invalidateCacheAfterAction(idTextField.getText());
                 promptLabel.setText("Product has been updated");
                 initializeProductData(idTextField.getText());
             }
@@ -100,7 +103,7 @@ public class ProductDetailsViewModel {
     }
 
     public void initializeProductData(String id) {
-        Product product = ProductService.getInstance().getProductDetails(id);
+        Product product = getProductFromCacheOrService(id);
 
         if (isNull(product)) {
             promptLabel.setText("Server does not responding");
@@ -220,5 +223,22 @@ public class ProductDetailsViewModel {
             promptLabel.setText("Price and weight has to be positive numeric value. Aborting edit...");
             return -1f;
         }
+    }
+
+    private Product getProductFromCacheOrService(String productId) {
+        Product productFromCache = CachingService.getInstance().getProductDetailsCache(productId);
+
+        if (isNull(productFromCache)) {
+            Product productFromService = ProductService.getInstance().getProductDetails(productId);
+            CachingService.getInstance().addProductDetailsToCache(productId, productFromService);
+            return productFromService;
+        } else {
+            return productFromCache;
+        }
+    }
+
+    private void invalidateCacheAfterAction(String productId) {
+        CachingService.getInstance().invalidateProductSummaryListCache();
+        CachingService.getInstance().invalidateProductDetailsCacheByKey(productId);
     }
 }

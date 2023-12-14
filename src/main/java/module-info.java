@@ -7,6 +7,7 @@ module org.pk.lab3 {
     requires lombok;
     requires spring.web;
     requires spring.core;
+    requires com.github.benmanes.caffeine;
 
     opens org.pk.lab3 to javafx.fxml;
     exports org.pk.lab3;

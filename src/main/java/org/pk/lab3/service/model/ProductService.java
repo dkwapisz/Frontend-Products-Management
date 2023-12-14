@@ -5,13 +5,13 @@ import org.pk.lab3.model.ProductSummary;
 import org.pk.lab3.utils.AppConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ProductService {
 
@@ -69,17 +69,17 @@ public class ProductService {
         }
     }
 
-    public boolean createProduct(Product product) {
+    public Product createProduct(Product product) {
         try {
-            ResponseEntity<Void> response = restTemplate.postForEntity(productApi, product, Void.class);
+            ResponseEntity<Product> response = restTemplate.postForEntity(productApi, product, Product.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("HTTP Status: " + response.getStatusCode());
-                return false;
+                return null;
             }
-            return true;
+            return response.getBody();
         } catch (HttpClientErrorException | ResourceAccessException e) {
             System.out.println("Error occurred: " + e.getMessage());
-            return false;
+            return null;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

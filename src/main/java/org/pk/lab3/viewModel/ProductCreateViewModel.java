@@ -9,12 +9,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
+import org.pk.lab3.service.cache.CachingService;
 import org.pk.lab3.service.model.ProductService;
 import org.pk.lab3.utils.AppConfig;
 
 import java.io.IOException;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.pk.lab3.model.ProductCategory.*;
 
 public class ProductCreateViewModel {
@@ -50,9 +52,11 @@ public class ProductCreateViewModel {
     @FXML
     public void createProductButtonOnClick() {
         if (validateProductData()) {
-            boolean created = ProductService.getInstance().createProduct(createProductFromFields());
+            Product product = ProductService.getInstance().createProduct(createProductFromFields());
 
-            if (created) {
+            if (nonNull(product)) {
+                clearAllFields();
+                CachingService.getInstance().addProductDetailsToCache(product.getId(), product);
                 promptLabel.setText("Product has been created");
             } else {
                 promptLabel.setText("Server does not responding");
@@ -101,6 +105,16 @@ public class ProductCreateViewModel {
         }
 
         return true;
+    }
+
+    private void clearAllFields() {
+        nameTextField.clear();
+        descriptionTextField.clear();
+        priceTextField.clear();
+        weightTextField.clear();
+
+        productCategoryComboBox.getSelectionModel().clearSelection();
+        quantitySpinner.getValueFactory().setValue(0);
     }
 
     private void initializeCategoriesComboBox() {

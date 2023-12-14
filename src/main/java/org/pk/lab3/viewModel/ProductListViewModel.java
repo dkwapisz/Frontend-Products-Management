@@ -8,7 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductSummary;
+import org.pk.lab3.service.cache.CachingService;
 import org.pk.lab3.service.model.ProductService;
 import org.pk.lab3.utils.AppConfig;
 
@@ -47,7 +49,7 @@ public class ProductListViewModel {
         this.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         this.availabilityColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
 
-        refreshList();
+        refreshList(false);
     }
 
     @FXML
@@ -68,11 +70,17 @@ public class ProductListViewModel {
 
     @FXML
     public void refreshButtonOnClick() {
-        refreshList();
+        refreshList(true);
     }
 
-    private void refreshList() {
-        List<ProductSummary> productSummaries =  ProductService.getInstance().getAllProducts();
+    private void refreshList(boolean forceRefresh) {
+        List<ProductSummary> productSummaries;
+
+        if (forceRefresh) {
+            productSummaries = ProductService.getInstance().getAllProducts();
+        } else {
+            productSummaries = getProductListFromCacheOrService();
+        }
 
         if (isNull(productSummaries)) {
             promptLabel.setText("Server does not responding.");
@@ -116,5 +124,17 @@ public class ProductListViewModel {
 
     private void clearPromptLabel() {
         promptLabel.setText("");
+    }
+
+    private List<ProductSummary> getProductListFromCacheOrService() {
+        List<ProductSummary> productListFromCache = CachingService.getInstance().getProductSummaryListCache("productList");
+
+        if (isNull(productListFromCache)) {
+            List<ProductSummary> productListFromService = ProductService.getInstance().getAllProducts();
+            CachingService.getInstance().addProductSummaryListToCache("productList", productListFromService);
+            return productListFromService;
+        } else {
+            return productListFromCache;
+        }
     }
 }
