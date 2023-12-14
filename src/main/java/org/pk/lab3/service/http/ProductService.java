@@ -14,8 +14,6 @@ import java.util.List;
 
 public class ProductService {
 
-    // TODO Clean up and refactor methods
-
     private final RestTemplate restTemplate;
     private final String productApi;
 
@@ -40,7 +38,7 @@ public class ProductService {
             ResponseEntity<List<ProductSummary>> response = restTemplate.exchange(productApi, HttpMethod.GET, null, responseType);
             return response.getBody();
         } catch (HttpClientErrorException | ResourceAccessException e) {
-            System.out.println("Error occurred: " + e.getMessage());
+            System.err.println("Error occurred: " + e.getMessage());
             return null;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -57,11 +55,11 @@ public class ProductService {
             } else if (response.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
                 return new Product();
             } else {
-                System.out.println("HTTP Status: " + response.getStatusCode());
+                System.err.println("HTTP Status: " + response.getStatusCode());
                 return null;
             }
         } catch (HttpClientErrorException | ResourceAccessException e) {
-            System.out.println("Error occurred: " + e.getMessage());
+            System.err.println("Error occurred: " + e.getMessage());
             return null;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -72,12 +70,12 @@ public class ProductService {
         try {
             ResponseEntity<Product> response = restTemplate.postForEntity(productApi, product, Product.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
-                System.out.println("HTTP Status: " + response.getStatusCode());
+                System.err.println("HTTP Status: " + response.getStatusCode());
                 return null;
             }
             return response.getBody();
         } catch (HttpClientErrorException | ResourceAccessException e) {
-            System.out.println("Error occurred: " + e.getMessage());
+            System.err.println("Error occurred: " + e.getMessage());
             return null;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -94,12 +92,12 @@ public class ProductService {
 
             ResponseEntity<Void> response = restTemplate.exchange(apiUrl, HttpMethod.PATCH, requestEntity, Void.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
-                System.out.println("HTTP Status: " + response.getStatusCode());
+                System.err.println("HTTP Status: " + response.getStatusCode());
                 return false;
             }
             return true;
         } catch (HttpClientErrorException e) {
-            System.out.println("HTTP Status: " + e.getStatusCode());
+            System.err.println("HTTP Status: " + e.getStatusCode());
             return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -112,7 +110,7 @@ public class ProductService {
             restTemplate.delete(apiUrl);
             return true;
         } catch (HttpClientErrorException | ResourceAccessException e) {
-            System.out.println("Error occurred: " + e.getMessage());
+            System.err.println("Error occurred: " + e.getMessage());
             return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
