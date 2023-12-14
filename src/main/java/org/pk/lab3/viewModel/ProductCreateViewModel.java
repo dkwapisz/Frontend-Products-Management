@@ -14,6 +14,7 @@ import org.pk.lab3.service.model.ProductService;
 import java.io.IOException;
 
 import static java.util.Objects.isNull;
+import static org.pk.lab3.model.ProductCategory.*;
 import static org.pk.lab3.utils.ViewPathFinals.MAIN_VIEW_PATH;
 
 public class ProductCreateViewModel {
@@ -31,6 +32,12 @@ public class ProductCreateViewModel {
 
     public Button backToMenuButton;
     public Button createProductButton;
+
+    @FXML
+    public void initialize() {
+        initializeCategoriesComboBox();
+        initializeQuantitySpinner();
+    }
 
     @FXML
     public void backToMenuButtonOnClick() throws IOException {
@@ -83,6 +90,25 @@ public class ProductCreateViewModel {
             return false;
         }
 
+        if (nameTextField.getText().length() < 3) {
+            promptLabel.setText("Product name has to be longer than 3 characters");
+            return false;
+        }
+
+        if (descriptionTextField.getText().length() < 3) {
+            promptLabel.setText("Product description has to be longer than 3 characters");
+            return false;
+        }
+
         return true;
+    }
+
+    private void initializeCategoriesComboBox() {
+        productCategoryComboBox.getItems().addAll(ELECTRONICS, MOTORS, COLLECTIBLES, HOME, GARDEN, FASHION, TOYS,
+                SPORT, INDUSTRIAL, JEWELRY);
+    }
+
+    private void initializeQuantitySpinner() {
+        quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0));
     }
 }

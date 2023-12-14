@@ -94,6 +94,7 @@ public class ProductDetailsViewModel {
 
             if (edited) {
                 promptLabel.setText("Product has been updated");
+                initializeProductData(idTextField.getText());
             }
         }
     }
