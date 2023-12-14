@@ -12,7 +12,7 @@ import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
 import org.pk.lab3.service.cache.CachingService;
 import org.pk.lab3.service.http.ProductService;
-import org.pk.lab3.utils.AppConfig;
+import org.pk.lab3.config.AppConfig;
 
 import java.io.IOException;
 

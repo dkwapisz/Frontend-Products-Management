@@ -2,7 +2,7 @@ package org.pk.lab3.service.http;
 
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductSummary;
-import org.pk.lab3.utils.AppConfig;
+import org.pk.lab3.config.AppConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;

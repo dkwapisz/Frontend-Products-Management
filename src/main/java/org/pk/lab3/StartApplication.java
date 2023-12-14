@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.pk.lab3.utils.AppConfig;
+import org.pk.lab3.config.AppConfig;
 
 import java.io.IOException;
 

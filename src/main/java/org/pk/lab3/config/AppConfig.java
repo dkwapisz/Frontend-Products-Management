@@ -1,4 +1,4 @@
-package org.pk.lab3.utils;
+package org.pk.lab3.config;
 
 import java.io.InputStream;
 import java.util.Properties;

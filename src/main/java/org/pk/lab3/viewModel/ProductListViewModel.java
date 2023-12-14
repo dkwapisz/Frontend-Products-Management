@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import org.pk.lab3.model.ProductSummary;
 import org.pk.lab3.service.cache.CachingService;
 import org.pk.lab3.service.http.ProductService;
-import org.pk.lab3.utils.AppConfig;
+import org.pk.lab3.config.AppConfig;
 
 import java.io.IOException;
 import java.util.List;
