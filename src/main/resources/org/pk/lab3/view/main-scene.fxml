@@ -12,7 +12,7 @@
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Button id="addProductButton" fx:id="addProductButton" layoutX="210.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="43.0" prefWidth="180.0" text="Add new product">
+      <Button id="addProductButton" fx:id="addProductButton" layoutX="210.0" layoutY="157.0" mnemonicParsing="false" onMouseClicked="#addProductButtonOnClick" prefHeight="43.0" prefWidth="180.0" text="Add new product">
          <font>
             <Font size="16.0" />
          </font>

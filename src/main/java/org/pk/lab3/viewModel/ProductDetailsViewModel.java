@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
 import org.pk.lab3.service.model.ProductService;
+import org.pk.lab3.utils.AppConfig;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -17,7 +18,6 @@ import java.util.Objects;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.pk.lab3.model.ProductCategory.*;
-import static org.pk.lab3.utils.ViewPathFinals.MAIN_VIEW_PATH;
 
 public class ProductDetailsViewModel {
 
@@ -52,7 +52,7 @@ public class ProductDetailsViewModel {
 
     @FXML
     public void backToMenuButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_VIEW_PATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getMainViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) productDetailsSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));

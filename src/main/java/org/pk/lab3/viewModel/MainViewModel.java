@@ -7,11 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.pk.lab3.utils.AppConfig;
 
 import java.io.IOException;
-
-import static org.pk.lab3.utils.ViewPathFinals.PRODUCT_CREATE_VIEW_PATH;
-import static org.pk.lab3.utils.ViewPathFinals.PRODUCT_LIST_VIEW_PATH;
 
 public class MainViewModel {
 
@@ -21,8 +19,8 @@ public class MainViewModel {
     public Button showProductListButton;
 
     @FXML
-    public void backToMenuButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PRODUCT_CREATE_VIEW_PATH));
+    public void addProductButtonOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getProductCreateViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) mainSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -30,7 +28,7 @@ public class MainViewModel {
 
     @FXML
     public void showProductListButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PRODUCT_LIST_VIEW_PATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getProductListViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) mainSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));

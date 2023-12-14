@@ -10,12 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.pk.lab3.model.ProductSummary;
 import org.pk.lab3.service.model.ProductService;
+import org.pk.lab3.utils.AppConfig;
 
 import java.io.IOException;
 import java.util.List;
 
 import static java.util.Objects.isNull;
-import static org.pk.lab3.utils.ViewPathFinals.*;
 
 public class ProductListViewModel {
 
@@ -52,7 +52,7 @@ public class ProductListViewModel {
 
     @FXML
     public void backToMenuButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(MAIN_VIEW_PATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getMainViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) productListSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -60,7 +60,7 @@ public class ProductListViewModel {
 
     @FXML
     public void addProductButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PRODUCT_CREATE_VIEW_PATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getProductCreateViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) productListSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -85,7 +85,7 @@ public class ProductListViewModel {
 
     private void initializeDoubleClickListener(TableView<ProductSummary> tableView) {
         tableView.setRowFactory(tv -> {
-            javafx.scene.control.TableRow<ProductSummary> row = new javafx.scene.control.TableRow<>();
+            TableRow<ProductSummary> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 long currentTime = System.currentTimeMillis();
                 if (currentTime - lastClickTime < 300) {
@@ -106,7 +106,7 @@ public class ProductListViewModel {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(PRODUCT_DETAILS_VIEW_PATH));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getProductDetailsViewPath()));
         Parent root = loader.load();
         ProductDetailsViewModel productDetailsViewModel = loader.getController();
         productDetailsViewModel.initializeProductData(row.getItem().getId());

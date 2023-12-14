@@ -1,8 +1,8 @@
 package org.pk.lab3.service.model;
 
-import lombok.Getter;
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductSummary;
+import org.pk.lab3.utils.AppConfig;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -17,20 +17,27 @@ public class ProductService {
 
     // TODO Clean up and refactor methods
 
-    private static final String API_URL = "http://localhost:8080/api/products";
     private final RestTemplate restTemplate;
+    private final String productApi;
 
-    @Getter
-    private static final ProductService instance = new ProductService();
+    private static ProductService instance = new ProductService();
+
+    public static synchronized ProductService getInstance() {
+        if (instance == null) {
+            instance = new ProductService();
+        }
+        return instance;
+    }
 
     private ProductService() {
         restTemplate = new RestTemplate();
+        productApi = AppConfig.getInstance().getProductApiUrl();
     }
 
     public List<ProductSummary> getAllProducts() {
         ParameterizedTypeReference<List<ProductSummary>> responseType = new ParameterizedTypeReference<>() {};
         try {
-            ResponseEntity<List<ProductSummary>> response = restTemplate.exchange(API_URL, HttpMethod.GET, null, responseType);
+            ResponseEntity<List<ProductSummary>> response = restTemplate.exchange(productApi, HttpMethod.GET, null, responseType);
             return response.getBody();
         } catch (HttpClientErrorException | ResourceAccessException e) {
             System.out.println("Error occurred: " + e.getMessage());
@@ -41,7 +48,7 @@ public class ProductService {
     }
 
     public Product getProductDetails(String productId) {
-        String apiUrl = API_URL + "/" + productId;
+        String apiUrl = productApi + "/" + productId;
         try {
             ResponseEntity<Product> response = restTemplate.getForEntity(apiUrl, Product.class);
 
@@ -63,7 +70,7 @@ public class ProductService {
 
     public boolean createProduct(Product product) {
         try {
-            ResponseEntity<Void> response = restTemplate.postForEntity(API_URL, product, Void.class);
+            ResponseEntity<Void> response = restTemplate.postForEntity(productApi, product, Void.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("HTTP Status: " + response.getStatusCode());
                 return false;
@@ -79,7 +86,7 @@ public class ProductService {
 
     public boolean updateProduct(String productId, Product product) {
         try {
-            String apiUrl = API_URL + "/" + productId;
+            String apiUrl = productApi + "/" + productId;
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -104,7 +111,7 @@ public class ProductService {
 
     public boolean deleteProduct(String productId) {
         try {
-            String apiUrl = API_URL + "/" + productId;
+            String apiUrl = productApi + "/" + productId;
             restTemplate.delete(apiUrl);
             return true;
         } catch (HttpClientErrorException | ResourceAccessException e) {
