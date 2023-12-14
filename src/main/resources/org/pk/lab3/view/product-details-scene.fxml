@@ -74,7 +74,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button id="backToMenuButton" fx:id="backToMenuButton" alignment="CENTER" layoutX="544.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER">
+      <Button id="backToListButton" fx:id="backToListButton" alignment="CENTER" layoutX="544.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#backToListButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Back to list" textAlignment="CENTER">
          <font>
             <Font size="13.0" />
          </font>

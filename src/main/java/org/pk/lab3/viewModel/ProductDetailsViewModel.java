@@ -39,7 +39,7 @@ public class ProductDetailsViewModel {
 
     public Label promptLabel;
 
-    public Button backToMenuButton;
+    public Button backToListButton;
     public Button deleteButton;
     public Button editButton;
     public Button editSaveButton;
@@ -53,8 +53,8 @@ public class ProductDetailsViewModel {
     }
 
     @FXML
-    public void backToMenuButtonOnClick() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getMainViewPath()));
+    public void backToListButtonOnClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(AppConfig.getInstance().getProductListViewPath()));
         Parent root = loader.load();
         Stage stage = (Stage) productDetailsSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -71,9 +71,10 @@ public class ProductDetailsViewModel {
             disableFieldsEditing();
             disableSaveButton();
             enableEditButton();
+        } else {
+            promptLabel.setText("Server does not responding");
         }
 
-        promptLabel.setText("Server does not responding");
     }
 
     @FXML
