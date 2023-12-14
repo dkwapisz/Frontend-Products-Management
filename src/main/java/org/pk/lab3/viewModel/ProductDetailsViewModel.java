@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
 import org.pk.lab3.service.cache.CachingService;
@@ -165,6 +166,21 @@ public class ProductDetailsViewModel {
 
     private void initializeQuantitySpinner() {
         quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0));
+
+        quantitySpinner.getValueFactory().setConverter(new IntegerStringConverter() {
+            @Override
+            public Integer fromString(String value) {
+                try {
+                    return super.fromString(value);
+                } catch (NumberFormatException e) {
+                    promptLabel.setText("Please input Integer value in quantity field.");
+                    return quantitySpinner.getValue();
+                }
+            }
+        });
+        TextFormatter<Integer> textFormatter = new TextFormatter<>(quantitySpinner.getValueFactory().getConverter(),
+                quantitySpinner.getValue());
+        quantitySpinner.getEditor().setTextFormatter(textFormatter);
     }
 
     private void enableFieldsEditing() {

@@ -24,12 +24,4 @@ public class Product {
     private LocalDateTime dateAdded;
     private LocalDateTime dateLastUpdate;
 
-    public Product(String id, String name, Integer quantity, Float price, Boolean available) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.available = available;
-    }
-
 }
