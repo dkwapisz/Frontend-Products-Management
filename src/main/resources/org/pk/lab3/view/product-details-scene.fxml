@@ -88,7 +88,7 @@
       <Spinner id="quantitySpinner" fx:id="quantitySpinner" disable="true" editable="true" layoutX="150.0" layoutY="250.0" prefHeight="50.0" prefWidth="250.0" />
       <Label id="promptLabel" fx:id="promptLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="37.0" prefHeight="30.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED">
          <font>
-            <Font name="Arial Bold Italic" size="12.0" />
+            <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
       <Button id="editSaveButton" fx:id="editSaveButton" alignment="CENTER" disable="true" layoutX="362.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#saveButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Save" textAlignment="CENTER">

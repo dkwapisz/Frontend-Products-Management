@@ -31,6 +31,7 @@ public class ProductService {
 
     private ProductService() {
         restTemplate = new RestTemplate();
+        setUpHttpRequestFactory();
         productApi = AppConfig.getInstance().getProductApiUrl();
     }
 
@@ -92,9 +93,6 @@ public class ProductService {
 
             HttpEntity<Product> requestEntity = new HttpEntity<>(product, headers);
 
-            ClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-            restTemplate.setRequestFactory(requestFactory);
-
             ResponseEntity<Void> response = restTemplate.exchange(apiUrl, HttpMethod.PATCH, requestEntity, Void.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("HTTP Status: " + response.getStatusCode());
@@ -120,5 +118,9 @@ public class ProductService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void setUpHttpRequestFactory() {
+        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
     }
 }

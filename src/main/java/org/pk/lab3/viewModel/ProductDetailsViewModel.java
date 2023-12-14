@@ -121,8 +121,6 @@ public class ProductDetailsViewModel {
 
         productCategoryComboBox.setValue(product.getProductCategory());
         quantitySpinner.getValueFactory().setValue(product.getQuantity());
-
-        clearPromptLabel();
     }
 
     public Product createProductObjectFromFieldsData() {
