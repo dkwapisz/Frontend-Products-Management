@@ -8,10 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductSummary;
 import org.pk.lab3.service.cache.CachingService;
-import org.pk.lab3.service.model.ProductService;
+import org.pk.lab3.service.http.ProductService;
 import org.pk.lab3.utils.AppConfig;
 
 import java.io.IOException;

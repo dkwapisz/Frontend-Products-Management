@@ -1,4 +1,4 @@
-package org.pk.lab3.service.model;
+package org.pk.lab3.service.http;
 
 import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductSummary;
@@ -11,7 +11,6 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ProductService {
 
