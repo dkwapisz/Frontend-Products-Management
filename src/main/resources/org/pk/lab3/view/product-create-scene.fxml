@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="org.pk.lab3.view.ProductCreateView" id="productCreateSceneView" fx:id="productCreateSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="org.pk.lab3.viewModel.ProductCreateViewModel" id="productCreateSceneView" fx:id="productCreateSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="50.0" layoutY="100.0" prefHeight="50.0" prefWidth="100.0" text="ID:">
          <font>

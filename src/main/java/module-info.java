@@ -5,9 +5,11 @@ module org.pk.lab3 {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires lombok;
+    requires spring.web;
+    requires spring.core;
 
     opens org.pk.lab3 to javafx.fxml;
     exports org.pk.lab3;
-    exports org.pk.lab3.view;
+    exports org.pk.lab3.viewModel;
     exports org.pk.lab3.model;
 }

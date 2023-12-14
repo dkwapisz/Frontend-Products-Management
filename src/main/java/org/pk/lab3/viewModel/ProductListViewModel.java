@@ -1,26 +1,23 @@
-package org.pk.lab3.view;
+package org.pk.lab3.viewModel;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.pk.lab3.model.ProductSummary;
+import org.pk.lab3.service.model.ProductService;
 
 import java.io.IOException;
+import java.util.List;
 
 import static java.util.Objects.isNull;
-import static javafx.collections.FXCollections.observableArrayList;
 import static org.pk.lab3.utils.ViewPathFinals.*;
 
-public class ProductListView {
+public class ProductListViewModel {
 
     public AnchorPane productListSceneView;
 
@@ -33,36 +30,24 @@ public class ProductListView {
 
     public Button backToMenuButton;
     public Button addProductButton;
+    public Button refreshButton;
+
+    public Label promptLabel;
 
     private long lastClickTime = 0;
 
     @FXML
     public void initialize() {
+        clearPromptLabel();
+        initializeDoubleClickListener(productListTableView);
+
         this.idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         this.nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         this.quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         this.priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         this.availabilityColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
 
-        // TODO Get data from ViewModel
-
-        ObservableList<ProductSummary> productList = createSampleProducts();
-        productListTableView.getItems().addAll(productList);
-
-        initializeDoubleClickListener(productListTableView);
-    }
-
-    // TODO To Remove
-    private ObservableList<ProductSummary> createSampleProducts() {
-        ObservableList<ProductSummary> productList = observableArrayList();
-
-        productList.add(new ProductSummary("1", "Laptop",  10, 1200.0f, true));
-        productList.add(new ProductSummary("2", "Smartphone", 50, 800.0f, true));
-        productList.add(new ProductSummary("3", "Headphones",  30, 150.0f, true));
-        productList.add(new ProductSummary("4", "Camera",  5, 2000.0f, true));
-        productList.add(new ProductSummary("5", "Smartwatch",  20, 180.0f, true));
-
-        return productList;
+        refreshList();
     }
 
     @FXML
@@ -79,6 +64,23 @@ public class ProductListView {
         Parent root = loader.load();
         Stage stage = (Stage) productListSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    public void refreshButtonOnClick() {
+        refreshList();
+    }
+
+    private void refreshList() {
+        List<ProductSummary> productSummaries =  ProductService.getInstance().getAllProducts();
+
+        if (isNull(productSummaries)) {
+            promptLabel.setText("Server does not responding.");
+        } else {
+            clearPromptLabel();
+            productListTableView.getItems().clear();
+            productListTableView.getItems().addAll(productSummaries);
+        }
     }
 
     private void initializeDoubleClickListener(TableView<ProductSummary> tableView) {
@@ -106,10 +108,13 @@ public class ProductListView {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(PRODUCT_DETAILS_VIEW_PATH));
         Parent root = loader.load();
-        ProductDetailsView productDetailsView = loader.getController();
-        productDetailsView.initializeProductData(row.getItem().getId());
+        ProductDetailsViewModel productDetailsViewModel = loader.getController();
+        productDetailsViewModel.initializeProductData(row.getItem().getId());
         Stage stage = (Stage) productListSceneView.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 
+    private void clearPromptLabel() {
+        promptLabel.setText("");
+    }
 }

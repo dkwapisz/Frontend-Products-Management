@@ -1,4 +1,4 @@
-package org.pk.lab3.view;
+package org.pk.lab3.viewModel;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static org.pk.lab3.utils.ViewPathFinals.MAIN_VIEW_PATH;
 
-public class ProductCreateView {
+public class ProductCreateViewModel {
 
     public AnchorPane productCreateSceneView;
 
@@ -42,5 +42,9 @@ public class ProductCreateView {
     public void createProductButtonOnClick() {
         // TODO Send data to ViewModel
         System.out.println("Add Product");
+    }
+
+    private void clearPromptLabel() {
+        promptLabel.setText("");
     }
 }

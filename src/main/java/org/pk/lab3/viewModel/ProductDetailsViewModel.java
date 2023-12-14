@@ -1,4 +1,4 @@
-package org.pk.lab3.view;
+package org.pk.lab3.viewModel;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,14 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.pk.lab3.model.Product;
 import org.pk.lab3.model.ProductCategory;
+import org.pk.lab3.service.model.ProductService;
 
 import java.io.IOException;
+import java.util.Objects;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.pk.lab3.model.ProductCategory.*;
 import static org.pk.lab3.utils.ViewPathFinals.MAIN_VIEW_PATH;
 
-public class ProductDetailsView {
+public class ProductDetailsViewModel {
 
     public AnchorPane productDetailsSceneView;
 
@@ -31,7 +36,6 @@ public class ProductDetailsView {
     public Spinner<Integer> quantitySpinner;
 
     public Label promptLabel;
-    public TreeView historyTreeView; // TODO History (?)
 
     public Button backToMenuButton;
     public Button deleteButton;
@@ -40,6 +44,7 @@ public class ProductDetailsView {
 
     @FXML
     public void initialize() {
+        clearPromptLabel();
         initializeCategoriesComboBox();
         initializeQuantitySpinner();
         disableFieldsEditing();
@@ -55,22 +60,26 @@ public class ProductDetailsView {
 
     @FXML
     public void deleteButtonOnClick() {
+        String productId = ProductService.getInstance().deleteProduct(idTextField.getText());
+
+        if (isNull(productId)) {
+            promptLabel.setText("Server does not responding");
+            return;
+        }
+
+        promptLabel.setText("Product with id: " + productId + " has been removed");
         clearProductDataFromView();
         disableFieldsEditing();
         disableSaveButton();
         enableEditButton();
-
-        // TODO Send Delete to ViewModel
-        System.out.println("Delete Product");
     }
 
     @FXML
     public void editButtonOnClick() {
+        clearPromptLabel();
         enableFieldsEditing();
         enableSaveButton();
         disableEditButton();
-
-        System.out.println("Edit Product");
     }
 
     @FXML
@@ -79,26 +88,59 @@ public class ProductDetailsView {
         disableSaveButton();
         enableEditButton();
 
-        // TODO Send Commit to ViewModel
-        System.out.println("Edit Product");
+        Product editedProduct = createProductObjectFromFieldsData();
+
+        if (nonNull(editedProduct)) {
+            String productId = ProductService.getInstance().updateProduct(idTextField.getText(), editedProduct);
+
+            if (nonNull(productId)) {
+                promptLabel.setText("Product with id: " + productId + " has been updated");
+            }
+        }
     }
 
     public void initializeProductData(String id) {
-        // TODO Get Product Details from ViewModel
+        Product product = ProductService.getInstance().getProductDetails(id);
 
-        String testString = "TEST";
+        if (isNull(product)) {
+            promptLabel.setText("Server does not responding");
+            return;
+        } else if (isNull(product.getId())) {
+            promptLabel.setText("Cannot found product");
+            return;
+        }
 
         idTextField.setText(id);
-        nameTextField.setText(testString);
-        descriptionTextField.setText(testString);
-        priceTextField.setText(testString);
-        weightTextField.setText(testString);
-        availabilityTextField.setText(testString);
-        creationDateTextField.setText(testString);
-        lastUpdateTextField.setText(testString);
+        nameTextField.setText(product.getName());
+        descriptionTextField.setText(product.getDescription());
+        priceTextField.setText(String.valueOf(product.getPrice()));
+        weightTextField.setText(String.valueOf(product.getWeight()));
+        availabilityTextField.setText(String.valueOf(product.getAvailable()));
+        creationDateTextField.setText(String.valueOf(product.getDateAdded()));
+        lastUpdateTextField.setText(String.valueOf(product.getDateLastUpdate()));
 
-        productCategoryComboBox.setValue(ELECTRONICS);
-        quantitySpinner.getValueFactory().setValue(10);
+        productCategoryComboBox.setValue(product.getProductCategory());
+        quantitySpinner.getValueFactory().setValue(product.getQuantity());
+
+        clearPromptLabel();
+    }
+
+    public Product createProductObjectFromFieldsData() {
+        Float price = validateFloatValue(priceTextField);
+        Float weight = validateFloatValue(weightTextField);
+
+        if (Objects.equals(price, -1f) || Objects.equals(weight, -1f)) {
+            return null;
+        }
+
+        return Product.builder()
+                .name(nameTextField.getText())
+                .description(descriptionTextField.getText())
+                .quantity(quantitySpinner.getValue())
+                .price(price)
+                .weight(weight)
+                .productCategory(productCategoryComboBox.getSelectionModel().getSelectedItem())
+                .build();
     }
 
     private void clearProductDataFromView() {
@@ -125,27 +167,19 @@ public class ProductDetailsView {
     }
 
     private void enableFieldsEditing() {
-        idTextField.setDisable(false);
         nameTextField.setDisable(false);
         descriptionTextField.setDisable(false);
         priceTextField.setDisable(false);
         weightTextField.setDisable(false);
-        availabilityTextField.setDisable(false);
-        creationDateTextField.setDisable(false);
-        lastUpdateTextField.setDisable(false);
         productCategoryComboBox.setDisable(false);
         quantitySpinner.setDisable(false);
     }
 
     private void disableFieldsEditing() {
-        idTextField.setDisable(true);
         nameTextField.setDisable(true);
         descriptionTextField.setDisable(true);
         priceTextField.setDisable(true);
         weightTextField.setDisable(true);
-        availabilityTextField.setDisable(true);
-        creationDateTextField.setDisable(true);
-        lastUpdateTextField.setDisable(true);
         productCategoryComboBox.setDisable(true);
         quantitySpinner.setDisable(true);
     }
@@ -164,5 +198,29 @@ public class ProductDetailsView {
 
     private void disableEditButton() {
         editButton.setDisable(true);
+    }
+
+    private void clearPromptLabel() {
+        promptLabel.setText("");
+    }
+
+    private Float validateFloatValue(TextField textField) {
+        if (isNull(textField.getText()) || textField.getText().isEmpty()) {
+            return null;
+        }
+
+        try {
+            float number = Float.parseFloat(textField.getText());
+
+            if (number <= 0) {
+                promptLabel.setText("Price and weight has to be positive numeric value. Aborting edit...");
+                return -1f;
+            }
+
+            return number;
+        } catch (NumberFormatException e) {
+            promptLabel.setText("Price and weight has to be positive numeric value. Aborting edit...");
+            return -1f;
+        }
     }
 }

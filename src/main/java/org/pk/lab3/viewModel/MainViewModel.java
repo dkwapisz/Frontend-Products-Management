@@ -1,19 +1,21 @@
-package org.pk.lab3.view;
+package org.pk.lab3.viewModel;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.pk.lab3.service.model.ProductService;
 
 import java.io.IOException;
 
 import static org.pk.lab3.utils.ViewPathFinals.PRODUCT_CREATE_VIEW_PATH;
 import static org.pk.lab3.utils.ViewPathFinals.PRODUCT_LIST_VIEW_PATH;
 
-public class MainView {
+public class MainViewModel {
 
     public AnchorPane mainSceneView;
 

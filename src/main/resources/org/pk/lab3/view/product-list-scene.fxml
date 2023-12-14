@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="productListSceneView" fx:id="productListSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pk.lab3.view.ProductListView">
+<AnchorPane id="productListSceneView" fx:id="productListSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pk.lab3.viewModel.ProductListViewModel">
    <children>
-      <TableView id="productListTableView" fx:id="productListTableView" layoutX="25.0" layoutY="25.0" prefHeight="700.0" prefWidth="950.0">
+      <TableView id="productListTableView" fx:id="productListTableView" layoutX="25.0" layoutY="49.0" prefHeight="676.0" prefWidth="950.0">
         <columns>
           <TableColumn id="idColumn" fx:id="idColumn" prefWidth="150.0" text="id" />
           <TableColumn id="nameColumn" fx:id="nameColumn" minWidth="0.0" prefWidth="305.0" text="name" />
@@ -19,7 +21,13 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button id="backToMenuButton" fx:id="backToMenuButton" layoutX="250.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Back to menu" />
-      <Button id="addProductButton" fx:id="addProductButton" layoutX="600.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#addProductButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Add new product" />
+      <Button id="backToMenuButton" fx:id="backToMenuButton" layoutX="204.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Back to menu" />
+      <Button id="addProductButton" fx:id="addProductButton" layoutX="646.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#addProductButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Add new product" />
+      <Label id="promptLabel" fx:id="promptLabel" alignment="CENTER" layoutX="279.0" layoutY="20.0" prefHeight="17.0" prefWidth="442.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button id="refreshButton" fx:id="refreshButton" layoutX="425.0" layoutY="740.0" mnemonicParsing="false" onMouseClicked="#refreshButtonOnClick" prefHeight="40.0" prefWidth="150.0" text="Refresh" />
    </children>
 </AnchorPane>

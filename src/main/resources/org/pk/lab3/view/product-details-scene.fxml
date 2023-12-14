@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="org.pk.lab3.view.ProductDetailsView" id="productDetailsSceneView" fx:id="productDetailsSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="org.pk.lab3.viewModel.ProductDetailsViewModel" id="productDetailsSceneView" fx:id="productDetailsSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="50.0" layoutY="100.0" prefHeight="50.0" prefWidth="100.0" text="ID:">
          <font>
@@ -74,7 +74,6 @@
       <TextField id="availabilityTextField" fx:id="availabilityTextField" disable="true" layoutX="700.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
       <TextField id="creationDateTextField" fx:id="creationDateTextField" disable="true" layoutX="700.0" layoutY="250.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
       <TextField id="lastUpdateTextField" fx:id="lastUpdateTextField" disable="true" layoutX="700.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TreeView id="historyTreeView" fx:id="historyTreeView" layoutX="150.0" layoutY="425.0" prefHeight="200.0" prefWidth="700.0" />
       <Button id="editButton" fx:id="editButton" alignment="CENTER" layoutX="175.0" layoutY="675.0" mnemonicParsing="false" onMouseClicked="#editButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Edit">
          <font>
             <Font size="13.0" />
