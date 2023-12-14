@@ -61,20 +61,23 @@ public class ProductService {
         }
     }
 
-    public void createProduct(Product product) {
+    public boolean createProduct(Product product) {
         try {
             ResponseEntity<Void> response = restTemplate.postForEntity(API_URL, product, Void.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("HTTP Status: " + response.getStatusCode());
+                return false;
             }
+            return true;
         } catch (HttpClientErrorException | ResourceAccessException e) {
             System.out.println("Error occurred: " + e.getMessage());
+            return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String updateProduct(String productId, Product product) {
+    public boolean updateProduct(String productId, Product product) {
         try {
             String apiUrl = API_URL + "/" + productId;
             HttpHeaders headers = new HttpHeaders();
@@ -88,25 +91,25 @@ public class ProductService {
             ResponseEntity<Void> response = restTemplate.exchange(apiUrl, HttpMethod.PATCH, requestEntity, Void.class);
             if (!response.getStatusCode().is2xxSuccessful()) {
                 System.out.println("HTTP Status: " + response.getStatusCode());
-                return null;
+                return false;
             }
-            return productId;
+            return true;
         } catch (HttpClientErrorException e) {
             System.out.println("HTTP Status: " + e.getStatusCode());
-            return null;
+            return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    public String deleteProduct(String productId) {
+    public boolean deleteProduct(String productId) {
         try {
             String apiUrl = API_URL + "/" + productId;
             restTemplate.delete(apiUrl);
-            return productId;
+            return true;
         } catch (HttpClientErrorException | ResourceAccessException e) {
             System.out.println("Error occurred: " + e.getMessage());
-            return null;
+            return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

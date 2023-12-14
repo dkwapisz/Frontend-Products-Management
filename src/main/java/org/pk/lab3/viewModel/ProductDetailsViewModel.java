@@ -60,18 +60,17 @@ public class ProductDetailsViewModel {
 
     @FXML
     public void deleteButtonOnClick() {
-        String productId = ProductService.getInstance().deleteProduct(idTextField.getText());
+        boolean deleted = ProductService.getInstance().deleteProduct(idTextField.getText());
 
-        if (isNull(productId)) {
-            promptLabel.setText("Server does not responding");
-            return;
+        if (deleted) {
+            promptLabel.setText("Product has been removed");
+            clearProductDataFromView();
+            disableFieldsEditing();
+            disableSaveButton();
+            enableEditButton();
         }
 
-        promptLabel.setText("Product with id: " + productId + " has been removed");
-        clearProductDataFromView();
-        disableFieldsEditing();
-        disableSaveButton();
-        enableEditButton();
+        promptLabel.setText("Server does not responding");
     }
 
     @FXML
@@ -91,10 +90,10 @@ public class ProductDetailsViewModel {
         Product editedProduct = createProductObjectFromFieldsData();
 
         if (nonNull(editedProduct)) {
-            String productId = ProductService.getInstance().updateProduct(idTextField.getText(), editedProduct);
+            boolean edited = ProductService.getInstance().updateProduct(idTextField.getText(), editedProduct);
 
-            if (nonNull(productId)) {
-                promptLabel.setText("Product with id: " + productId + " has been updated");
+            if (edited) {
+                promptLabel.setText("Product has been updated");
             }
         }
     }

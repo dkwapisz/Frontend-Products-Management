@@ -8,29 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:controller="org.pk.lab3.viewModel.ProductCreateViewModel" id="productCreateSceneView" fx:id="productCreateSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="productCreateSceneView" fx:id="productCreateSceneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pk.lab3.viewModel.ProductCreateViewModel">
    <children>
-      <Label layoutX="50.0" layoutY="100.0" prefHeight="50.0" prefWidth="100.0" text="ID:">
+      <Label layoutX="50.0" layoutY="100.0" prefHeight="50.0" prefWidth="100.0" text="Name:">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="150.0" prefHeight="50.0" prefWidth="100.0" text="Name:">
+      <Label layoutX="50.0" layoutY="150.0" prefHeight="50.0" prefWidth="100.0" text="Description:">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="200.0" prefHeight="50.0" prefWidth="100.0" text="Description:">
+      <Label layoutX="50.0" layoutY="200.0" prefHeight="50.0" prefWidth="100.0" text="Quantity:">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="250.0" prefHeight="50.0" prefWidth="100.0" text="Quantity:">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="50.0" layoutY="300.0" prefHeight="50.0" prefWidth="100.0" text="Price:">
+      <Label layoutX="550.0" layoutY="150.0" prefHeight="50.0" prefWidth="100.0" text="Price:">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
@@ -40,34 +35,27 @@
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="550.0" layoutY="150.0" prefHeight="50.0" prefWidth="150.0" text="Available:">
-         <font>
-            <Font name="Arial Bold" size="16.0" />
-         </font>
-      </Label>
       <Label layoutX="550.0" layoutY="200.0" prefHeight="50.0" prefWidth="150.0" text="Product Category:">
          <font>
             <Font name="Arial Bold" size="16.0" />
          </font>
       </Label>
-      <TextField id="idTextField" fx:id="idTextField" layoutX="150.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="nameTextField" fx:id="nameTextField" layoutX="150.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="descriptionTextField" fx:id="descriptionTextField" layoutX="150.0" layoutY="200.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="priceTextField" fx:id="priceTextField" layoutX="150.0" layoutY="300.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="nameTextField" fx:id="nameTextField" layoutX="150.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="descriptionTextField" fx:id="descriptionTextField" layoutX="150.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <TextField id="priceTextField" fx:id="priceTextField" layoutX="700.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
       <TextField id="weightTextField" fx:id="weightTextField" layoutX="700.0" layoutY="100.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <TextField id="availabilityTextField" fx:id="availabilityTextField" layoutX="700.0" layoutY="150.0" maxHeight="50.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" prefHeight="50.0" prefWidth="250.0" />
-      <Button id="backToMenuButton" fx:id="backToMenuButton" onMouseClicked="#backToMenuButtonOnClick" alignment="CENTER" layoutX="350.0" layoutY="495.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER">
+      <Button id="backToMenuButton" fx:id="backToMenuButton" alignment="CENTER" layoutX="350.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#backToMenuButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Back to menu" textAlignment="CENTER">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button id="createProductButton" fx:id="createProductButton" onMouseClicked="#createProductButtonOnClick" alignment="CENTER" layoutX="539.0" layoutY="495.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Create" textAlignment="CENTER">
+      <Button id="createProductButton" fx:id="createProductButton" alignment="CENTER" layoutX="539.0" layoutY="495.0" mnemonicParsing="false" onMouseClicked="#createProductButtonOnClick" prefHeight="50.0" prefWidth="100.0" text="Create" textAlignment="CENTER">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
       <ComboBox id="productCategoryComboBox" fx:id="productCategoryComboBox" layoutX="700.0" layoutY="200.0" prefHeight="50.0" prefWidth="250.0" />
-      <Spinner id="quantitySpinner" fx:id="quantitySpinner" editable="true" layoutX="150.0" layoutY="250.0" prefHeight="50.0" prefWidth="250.0" />
+      <Spinner id="quantitySpinner" fx:id="quantitySpinner" editable="true" layoutX="150.0" layoutY="200.0" prefHeight="50.0" prefWidth="250.0" />
       <Label id="promptLabel" fx:id="promptLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="37.0" prefHeight="30.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="Arial Bold Italic" size="12.0" />

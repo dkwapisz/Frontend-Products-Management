@@ -7,23 +7,25 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.pk.lab3.model.Product;
+import org.pk.lab3.model.ProductCategory;
+import org.pk.lab3.service.model.ProductService;
 
 import java.io.IOException;
 
+import static java.util.Objects.isNull;
 import static org.pk.lab3.utils.ViewPathFinals.MAIN_VIEW_PATH;
 
 public class ProductCreateViewModel {
 
     public AnchorPane productCreateSceneView;
 
-    public TextField idTextField;
     public TextField nameTextField;
     public TextField descriptionTextField;
     public TextField priceTextField;
     public TextField weightTextField;
-    public TextField availabilityTextField;
 
-    public ComboBox<String> productCategoryComboBox;
+    public ComboBox<ProductCategory> productCategoryComboBox;
     public Spinner<Integer> quantitySpinner;
     public Label promptLabel;
 
@@ -40,11 +42,47 @@ public class ProductCreateViewModel {
 
     @FXML
     public void createProductButtonOnClick() {
-        // TODO Send data to ViewModel
-        System.out.println("Add Product");
+        if (validateProductData()) {
+            boolean created = ProductService.getInstance().createProduct(createProductFromFields());
+
+            if (created) {
+                promptLabel.setText("Product has been created");
+            } else {
+                promptLabel.setText("Server does not responding");
+            }
+        }
     }
 
-    private void clearPromptLabel() {
-        promptLabel.setText("");
+    private Product createProductFromFields() {
+        return Product.builder()
+                .name(nameTextField.getText())
+                .description(descriptionTextField.getText())
+                .price(Float.parseFloat(priceTextField.getText()))
+                .weight(Float.parseFloat(weightTextField.getText()))
+                .productCategory(productCategoryComboBox.getSelectionModel().getSelectedItem())
+                .quantity(quantitySpinner.getValue())
+                .build();
+    }
+
+    private boolean validateProductData() {
+        if (isNull(nameTextField) || nameTextField.getText().isEmpty() ||
+                isNull(descriptionTextField) || descriptionTextField.getText().isEmpty() ||
+                isNull(priceTextField) || priceTextField.getText().isEmpty() ||
+                isNull(weightTextField) || weightTextField.getText().isEmpty() ||
+                isNull(quantitySpinner.getValue()) || productCategoryComboBox.getSelectionModel().isEmpty()) {
+
+            promptLabel.setText("Some of values are empty. Aborting creation...");
+            return false;
+        }
+
+        try {
+            Float.parseFloat(priceTextField.getText());
+            Float.parseFloat(weightTextField.getText());
+        } catch (NumberFormatException ignored) {
+            promptLabel.setText("Price and weight has to be positive numeric value. Aborting creation...");
+            return false;
+        }
+
+        return true;
     }
 }
